@@ -59,9 +59,16 @@ def goto_location():
     location = LocationGlobalRelative(-35.36311304, 149.16775127,10)  # latitude, longtitude and altitude (we use 10 meter for horizontal flat travel)
     vehicle.simple_goto(location, groundspeed=50) # in meters/second
     time.sleep(10)
-    vehicle.mode = VehicleMode("RTL")
-    print(f"Altitude: {vehicle.location.global_relative_frame.alt}")
+    #vehicle.mode = VehicleMode("RTL")
+    #print(f"Altitude: {vehicle.location.global_relative_frame.alt}")
+    
+    print(vehicle.location.global_relative_frame.lat, location.lat)
+    #if (vehicle.location.global_relative_frame.alt == location.alt) and (vehicle.location.global_relative_frame.lon == location.lon):
+    #    print("Equal")
+  
     vehicle.close()
 
-launch_seq(10)
-goto_location()
+if __name__ == "__main__":
+    launch_seq(10)
+    while True:
+        goto_location()
