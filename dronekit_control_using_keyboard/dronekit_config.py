@@ -2,6 +2,7 @@ from dronekit import *
 import socket 
 from time import sleep
 from dronekit_engine import *
+from dronekit_control_tab import * 
 
 class Drone:
     def __init__(self):
@@ -38,6 +39,7 @@ class Drone:
             sleep(1)
                 
         self.is_active = True 
+        self.control_tab = controlTab(self)
         
         # Return the drone class - used for non thread engine
         #self.engine = Engine(self)
