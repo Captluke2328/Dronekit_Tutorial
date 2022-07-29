@@ -44,7 +44,7 @@ class controlTab:
     
     # Move Left
     def leftSpeedY(self):
-        self.speed_y = -10 #self.speed_y - self.increment_value_y
+        self.speed_y = 10 #self.speed_y - self.increment_value_y
         self.engine.executeChangesNow()
     
     # Move Right
@@ -81,7 +81,7 @@ class controlTab:
     def armAndTakeoff(self, takeoff_alt):
         print("Arming") 
         
-        self.vehicle.mode = VehicleMode("GUIDED")   
+        #self.vehicle.mode = VehicleMode("GUIDED")   
 
         self.vehicle.armed = True
         time.sleep(1)
@@ -114,9 +114,9 @@ class controlTab:
             time.sleep(0.5)
         
         while True:
-            current_hight = self.vehicle.location.global_relative_frame.alt
+            current_high = self.vehicle.location.global_relative_frame.alt
         
-            if current_hight >= rtl_alt * 0.95:
+            if current_high >= rtl_alt * 0.95:
                 print("Safe RTL Altitude reached")
                 self.vehicle.mode = VehicleMode("RTL")
                 break
@@ -127,6 +127,9 @@ class controlTab:
         print("Landing")
         self.vehicle.channels.overrides = {}
         self.vehicle.mode = VehicleMode("LAND")
+        
+    def loiter(self):
+        self.vehicle.channels.overrides['3'] = 1500
 
         
         

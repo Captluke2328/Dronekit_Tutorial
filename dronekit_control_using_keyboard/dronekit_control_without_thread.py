@@ -70,7 +70,7 @@ class dronekitControlwithoutThread():
                     #sleep(delay)
                     
                 if kp.is_pressed('a'):
-                    self.control_tab.rotateRight(10)
+                    self.control_tab.rotateLeft(45)
                     print("Rotate Left")
                     return
 
@@ -79,7 +79,7 @@ class dronekitControlwithoutThread():
                     #sleep(delay)
                     
                 elif kp.is_pressed('d'): 
-                    self.control_tab.rotateLeft(45)
+                    self.control_tab.rotateRight(45)
                     print("Rotate Right")
                     return
 
@@ -88,7 +88,7 @@ class dronekitControlwithoutThread():
                     #sleep(delay)
                     
                 if kp.is_pressed('q'):
-                    self.control_tab.goHome(45)
+                    self.control_tab.goHome(15)
                     print("RTL")
                     return
                 
@@ -99,6 +99,10 @@ class dronekitControlwithoutThread():
                 elif kp.is_pressed('e'):
                     self.control_tab.stopMovement()
                     print("Stop movement")
+                    
+                if kp.is_pressed('x'):
+                    self.control_tab.loiter()
+                    print("Set Loiter")
                     
             except Exception as e:
                 print("Failed to send command")
