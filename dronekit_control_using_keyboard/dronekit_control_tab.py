@@ -44,7 +44,7 @@ class controlTab:
     
     # Move Left
     def leftSpeedY(self):
-        self.speed_y = 10 #self.speed_y - self.increment_value_y
+        self.speed_y = -10 #self.speed_y - self.increment_value_y
         self.engine.executeChangesNow()
     
     # Move Right
