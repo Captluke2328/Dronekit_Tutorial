@@ -1,3 +1,4 @@
+import this
 from dronekit import *
 import keyboard as kp
 import socket
@@ -37,57 +38,82 @@ class control():
         self.vehicle.mode = VehicleMode("GUIDED")
         while not self.vehicle.mode.name == "GUIDED":
             sleep(1)
-            
+        
+        self.vehicle = Engine(self)
+
 
     def getKeyboardInput(self):
-        lr,fb,ud,yv = 0,0,0,0,
-        
+        u,d,f,b,l,r,rl,rr,l,s  = 0,0,0,0,0,0,0,0,0,0
+
         if kp.is_pressed('UP'):
-            fb = Engine.armAndTakeoff(self,10)
+            u = self.vehicle.armAndTakeoff(10)
             print("Takeoff")
+
+            #Engine.armAndTakeoff(self,10)
             
         elif kp.is_pressed('DOWN'):
-            fb = Engine.land(self)
+            d = self.vehicle.land(self)
             print("Landing")
-            sleep(2)
+
+            #Engine.land(self)
+            #sleep(1)
             
         if kp.is_pressed('LEFT'): 
-            lr = Engine.left(self)
-            sleep(5)
+            l = self.vehicle.left()
+            print("LEFT")
+
+            #lr = self.vehicle.left()
+            #Engine.left(self)
+            #sleep(1)
 
         elif kp.is_pressed('RIGHT'):
-            lr = Engine.right(self)
-            sleep(5)
+            r = self.vehicle.right()
+            print("RIGHT")
+
+            #lr = self.vehicle.right()
+            #Engine.right(self)
+            #sleep(1)
     
         if kp.is_pressed('w'):
-            ud = Engine.forward(self)
+            f = self.vehicle.combineForwardBackward(10)
             print("Forward")
-            sleep(2)
+
+            #ud = self.vehicle.forward()
+            #Engine.forward(self)
+            #sleep(1)
             
         elif kp.is_pressed('s'):
-            ud = Engine.backward(self)
+            r = self.vehicle.combineForwardBackward(-10) 
             print("Backward")
-            sleep(2)
+
+            #ud = self.vehicle.backward()
+            #Engine.backward(self)
+            #sleep(1)
             
         if kp.is_pressed('a'):
-            yv = Engine.rotate(self,-1,180)
+            rl = self.vehicle.rotate(-1,10)
             print("Rotate Left")
-            sleep(2)
+
+            #Engine.rotate(self,-1,180)
+            #sleep(1)
             
         elif kp.is_pressed('d'): 
-            yv = Engine.rotate(self,1,180)
+            rr = self.vehicle.rotate(1,10)
             print("Rotate Right")
-            sleep(2)
+
+            #Engine.rotate(self,1,180)
+            #sleep(1)
             
         if kp.is_pressed('q'):
+            self.vehicle.goinghome()
             print("RTL")
-            Engine.goinghome(self)
-            sleep(1)
+
+            #Engine.goinghome(self)
+            #sleep(1)
             
-        if kp.is_pressed('e'): pass
-    
-    
-        #return [lr,fb,ud,yv]
+        if kp.is_pressed('e'):
+            self.vehicle.stopSpeedXY()
+            print("Stop Speed")
 
 if __name__ == '__main__':
     init = control()
