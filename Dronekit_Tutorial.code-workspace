@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "..\\ArduCopter\\Autonomous-Ai-drone-scripts"
+		}
+	],
+	"settings": {}
+}

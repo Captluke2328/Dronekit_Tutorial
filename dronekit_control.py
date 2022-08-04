@@ -11,7 +11,8 @@ class control():
             self.connection_string = '127.0.0.1:14550'
             self.vehicle = connect(self.connection_string, wait_ready=True)
             print("Virtual Copter is Ready")
-                 
+            
+            
         # Bad TCP connection
         except socket.error:
             print("No server exist")
@@ -39,27 +40,27 @@ class control():
         while not self.vehicle.mode.name == "GUIDED":
             sleep(1)
         
-        self.vehicle = Engine(self)
+        self.engine = Engine(self)
 
 
     def getKeyboardInput(self):
         u,d,f,b,l,r,rl,rr,l,s  = 0,0,0,0,0,0,0,0,0,0
 
         if kp.is_pressed('UP'):
-            u = self.vehicle.armAndTakeoff(10)
+            u = self.engine.armAndTakeoff(10)
             print("Takeoff")
 
             #Engine.armAndTakeoff(self,10)
             
         elif kp.is_pressed('DOWN'):
-            d = self.vehicle.land(self)
+            d = self.engine.land(self)
             print("Landing")
 
             #Engine.land(self)
             #sleep(1)
             
         if kp.is_pressed('LEFT'): 
-            l = self.vehicle.left()
+            l = self.engine.left()
             print("LEFT")
 
             #lr = self.vehicle.left()
@@ -67,7 +68,7 @@ class control():
             #sleep(1)
 
         elif kp.is_pressed('RIGHT'):
-            r = self.vehicle.right()
+            r = self.engine.right()
             print("RIGHT")
 
             #lr = self.vehicle.right()
@@ -75,7 +76,7 @@ class control():
             #sleep(1)
     
         if kp.is_pressed('w'):
-            f = self.vehicle.combineForwardBackward(10)
+            f = self.engine.combineForwardBackward(10)
             print("Forward")
 
             #ud = self.vehicle.forward()
@@ -83,7 +84,7 @@ class control():
             #sleep(1)
             
         elif kp.is_pressed('s'):
-            r = self.vehicle.combineForwardBackward(-10) 
+            r = self.engine.combineForwardBackward(-10) 
             print("Backward")
 
             #ud = self.vehicle.backward()
@@ -91,28 +92,28 @@ class control():
             #sleep(1)
             
         if kp.is_pressed('a'):
-            rl = self.vehicle.rotate(-1,10)
+            rl = self.engine.rotate(-1,10)
             print("Rotate Left")
 
             #Engine.rotate(self,-1,180)
             #sleep(1)
             
         elif kp.is_pressed('d'): 
-            rr = self.vehicle.rotate(1,10)
+            rr = self.engine.rotate(1,10)
             print("Rotate Right")
 
             #Engine.rotate(self,1,180)
             #sleep(1)
             
         if kp.is_pressed('q'):
-            self.vehicle.goinghome()
+            self.engine.goinghome()
             print("RTL")
 
             #Engine.goinghome(self)
             #sleep(1)
             
         if kp.is_pressed('e'):
-            self.vehicle.stopSpeedXY()
+            self.engine.stopSpeedXY()
             print("Stop Speed")
 
 if __name__ == '__main__':
