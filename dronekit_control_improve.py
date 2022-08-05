@@ -62,7 +62,7 @@ class control_improvise():
         # Go Right
         elif kp.is_pressed('d') and self.vehicle.armed:
             print("Go Right")
-            x,y = 0.0, 1.0 
+            x,y = 0.0, 2.0 
             yaw = self.vehicle.attitude.yaw
             self.engine_imp.send_global_velocity(
                 x * np.cos(yaw) - y * np.sin(yaw),
@@ -75,7 +75,7 @@ class control_improvise():
         # Go Left
         elif kp.is_pressed('a') and self.vehicle.armed:
             print("Go Left")
-            x,y = 0.0, -1.0 
+            x,y = 0.0, -2.0 
             yaw = self.vehicle.attitude.yaw
             self.engine_imp.send_global_velocity(
                 x * np.cos(yaw) - y * np.sin(yaw),
@@ -88,7 +88,7 @@ class control_improvise():
         # Go Back
         elif kp.is_pressed('s') and self.vehicle.armed:
             print("Go Back")
-            x, y = -1.0, 0.0  # meters
+            x, y = -2.0, 0.0  # meters
             yaw = self.vehicle.attitude.yaw
             self.engine_imp.send_global_velocity(
                 x * np.cos(yaw) - y * np.sin(yaw),
@@ -101,7 +101,7 @@ class control_improvise():
         # Go Front
         elif kp.is_pressed('w') and self.vehicle.armed:
             print("Go Front")
-            x, y = 1.0, 0.0  # meters
+            x, y = 2.0, 0.0  # meters
             yaw = self.vehicle.attitude.yaw
             self.engine_imp.send_global_velocity(
                 x * np.cos(yaw) - y * np.sin(yaw),
