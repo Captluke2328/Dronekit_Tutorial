@@ -6,7 +6,9 @@ from dronekit import *
     
     USING USB  : mavproxy.py --master=/dev/ttyACM0 --out=udp:10.60.216.198
     USING UART : mavproxy.py --master=/dev/ttyTHS1,921600 --out=udp:10.60.216.198:14550
-
+    
+    /dev/ttyTHS1 port from Pixhawk is not authorized for read and write access. May encounter, permission denied.
+    To enable this simply run chmod 666 /dev/ttyTHS1
 '''
 #connection_string = '10.60.216.198:14550'
 
