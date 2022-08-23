@@ -1,4 +1,25 @@
+"""
+Author : Lukas Johnny
+Date : 23/8/2022
+Description : This script is used to send data from Keyboard using Python library to Arduino integrated
+              with NRF which act as a transmitter.
 
+              Below is Key input from Python and Arduino and its function
+              Keyboard : Arduino : Function
+               g           g     : GUIDED Mode
+               h           h     : STABILIZE Mode
+               UP          u     : TAKEOFF Mode
+               d           d     : Go Right
+               a           a     : Go Left
+               w           w     : Move Front
+               s           s     : Move backward
+               q           q     : LAND Mode
+               e           e     : Freeze
+               LEFT        l     : Yaw left
+               RIGHT       r     : Yaw Right
+               
+             
+"""
 import keyboard as kp
 from time import sleep
 import numpy as np
