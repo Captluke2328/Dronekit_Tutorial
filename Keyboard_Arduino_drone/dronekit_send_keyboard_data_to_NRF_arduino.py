@@ -15,10 +15,10 @@ Description : This script is used to send data from Keyboard using Python librar
                s           s     : Move backward
                q           q     : LAND Mode
                e           e     : Freeze
-               LEFT        l     : Yaw left
-               RIGHT       r     : Yaw Right
-               
-             
+               r           r     : Reset
+               LEFT        n     : Yaw left
+               RIGHT       m     : Yaw Right
+                        
 """
 import keyboard as kp
 from time import sleep
@@ -94,16 +94,21 @@ class KeyboardArduino:
         elif kp.is_pressed('e'):
             #print("Stop movement")
             self.sendData('e')
+            
+        # Reset
+        elif kp.is_pressed('r'):
+            #print("Reset")
+            self.sendData('r')
 
         # Yaw Left
         elif kp.is_pressed('LEFT'):
             #print("Yaw Left")
-            self.sendData('l')
+            self.sendData('n')
 
         # Yaw Right
         elif kp.is_pressed('RIGHT'):
             #print("Yaw RIGHT")
-            self.sendData('r')
+            self.sendData('m')
         
         # Reset
         else:
