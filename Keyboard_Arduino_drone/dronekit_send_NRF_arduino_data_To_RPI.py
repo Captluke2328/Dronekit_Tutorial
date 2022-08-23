@@ -143,7 +143,12 @@ class readdatafromArdtoRpi():
                 0,
                 2,      
             )
+            
+            # 1st option 
             self.engine.send_global_velocity(0,0,0,1)
+            
+            # 2nd option
+            #self.engine.send_movement_command_XYA(x,y,5)
 
         # Go Left
         elif (kp == 'a') and self.vehicle.armed:
@@ -156,7 +161,12 @@ class readdatafromArdtoRpi():
                 0,
                 2,      
             )
+            
+            # 1st option
             self.engine.send_global_velocity(0,0,0,1)
+            
+            # 2nd option
+            #self.engine.send_movement_command_XYA(x,y,5)
             
         # Go Back
         elif (kp == 's') and self.vehicle.armed:
@@ -169,7 +179,12 @@ class readdatafromArdtoRpi():
                 0,
                 2,
             )
+            
+            # 1st option
             self.engine.send_global_velocity(0, 0, 0, 1)
+            
+            # 2nd option
+            #self.engine.send_movement_command_XYA(x,y,5)
             
         # Go Front
         elif (kp == 'w') and self.vehicle.armed:
@@ -182,7 +197,12 @@ class readdatafromArdtoRpi():
                 0,
                 2,
             )
+            
+            # 1st option
             self.engine.send_global_velocity(0, 0, 0, 1)
+            
+            # 2nd option
+            #self.engine.send_movement_command_XYA(x,y,5)
 
         # Land   
         elif (kp == 'q') and self.vehicle.armed:
@@ -203,7 +223,12 @@ class readdatafromArdtoRpi():
             z,
             2, 
             )
+            
+            # 1st option
             self.engine.send_global_velocity(0, 0, 0, 1)
+            
+            # 2nd option
+            #self.engine.send_movement_command_XYA(x,y,5)
 
         # Yaw Left
         elif (kp == 'l') and self.vehicle.armed:
@@ -225,7 +250,12 @@ class readdatafromArdtoRpi():
             z,
             2, 
             )
+            
+            # 1st option
             self.engine.send_global_velocity(0, 0, 0, 1)
+            
+            # 2nd option
+            #self.engine.send_movement_command_XYA(x,y,5)
 
     #sleep(0.25)
 
@@ -242,5 +272,3 @@ if __name__ == "__main__":
         receivedata = init.getData(ser)
         vals = init.getKeyboardInput(receivedata)
 
-        
-    
