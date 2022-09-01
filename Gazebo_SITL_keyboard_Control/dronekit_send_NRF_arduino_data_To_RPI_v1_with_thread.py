@@ -56,6 +56,7 @@ class readdatafromArdtoRpi():
             
             '''Below IP adderess belong to current computer address taken from ZeroTier'''
             self.connection_string = '192.168.195.190:14553' 
+            
             self.vehicle = connect(self.connection_string, wait_ready=True)
             print("Virtual Copter is Ready")
 

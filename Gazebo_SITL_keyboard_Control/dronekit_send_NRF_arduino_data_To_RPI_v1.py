@@ -53,7 +53,7 @@ class readdatafromArdtoRpi():
             #self.connection_string = '/dev/ttyAMA0,921600'
             #self.connection_string = '127.0.0.1:14550'
             
-            '''Below IP adderess belong to current computer address taken from ZeroTier'''
+            '''Below IP address belong to current computer address taken from ZeroTier'''
             connection_string = '192.168.195.190:14553'
             
             self.vehicle = connect(self.connection_string, wait_ready=True)
