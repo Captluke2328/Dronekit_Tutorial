@@ -51,7 +51,11 @@ class readdatafromArdtoRpi():
     def __init__(self):
         try:       
             #self.connection_string = '/dev/ttyAMA0,921600'
-            self.connection_string = '127.0.0.1:14550'
+            #self.connection_string = '127.0.0.1:14550'
+            
+            '''Below IP adderess belong to current computer address taken from ZeroTier'''
+            connection_string = '192.168.195.190:14553'
+            
             self.vehicle = connect(self.connection_string, wait_ready=True)
             print("Virtual Copter is Ready")
 
@@ -158,7 +162,7 @@ class readdatafromArdtoRpi():
         # Go Right
         elif (kp.is_pressed('d')) and self.vehicle.armed:
             print("Go Right")
-            x,y = 0.0, 2.0 
+            x,y = 0.0, 0.5 
             yaw = self.vehicle.attitude.yaw
             self.engine.send_global_velocity(
                 x * np.cos(yaw) - y * np.sin(yaw),
@@ -176,7 +180,7 @@ class readdatafromArdtoRpi():
         # Go Left
         elif (kp.is_pressed('a')) and self.vehicle.armed:
             print("Go Left")
-            x,y = 0.0, -2.0 
+            x,y = 0.0, -0.5 
             yaw = self.vehicle.attitude.yaw
             self.engine.send_global_velocity(
                 x * np.cos(yaw) - y * np.sin(yaw),
@@ -194,7 +198,7 @@ class readdatafromArdtoRpi():
         # Go Back
         elif (kp.is_pressed('s')) and self.vehicle.armed:
             print("Go Back")
-            x, y = -2.0, 0.0  # meters
+            x, y = -0.5, 0.0  # meters
             yaw = self.vehicle.attitude.yaw
             self.engine.send_global_velocity(
                 x * np.cos(yaw) - y * np.sin(yaw),
@@ -212,7 +216,7 @@ class readdatafromArdtoRpi():
         # Go Front
         elif (kp.is_pressed('w')) and self.vehicle.armed:
             print("Go Front")
-            x, y = 2.0, 0.0  # meters
+            x, y = 0.5, 0.0  # meters
             yaw = self.vehicle.attitude.yaw
             self.engine.send_global_velocity(
                 x * np.cos(yaw) - y * np.sin(yaw),

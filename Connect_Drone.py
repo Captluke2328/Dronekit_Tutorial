@@ -13,7 +13,11 @@ from dronekit import *
 #connection_string = '10.60.216.198:14550'
 
 '''Using SiTL Connection'''
-connection_string = '127.0.0.1:14550'
+#connection_string = '127.0.0.1:14550'
+
+'''Using SiTL Connection from  different computer - This IP address below to receiver device for example RPI
+   This IP address is based on given ZeroTier IP address'''
+connection_string = '192.168.195.190:14553'
 
 '''Using Uart Serial Rx->Tx and Tx-Rx connection'''
 #connection_string = '/dev/ttyTHS1,921600'
