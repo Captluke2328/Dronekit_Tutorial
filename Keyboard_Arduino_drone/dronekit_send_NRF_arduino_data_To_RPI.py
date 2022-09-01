@@ -44,13 +44,15 @@ from time import sleep
 import numpy as np
 from dronekit import *
 from dronekit_engine_for_RPI import * 
+import keyboard as kp
 
 class readdatafromArdtoRpi():
     
     # Connect to Copter
     def __init__(self):
         try:       
-            self.connection_string = '/dev/ttyAMA0,921600'
+            #self.connection_string = '/dev/ttyAMA0,921600'
+            self.connection_string = '127.0.0.1:14550'
             self.vehicle = connect(self.connection_string, wait_ready=True)
             print("Virtual Copter is Ready")
 
@@ -58,6 +60,7 @@ class readdatafromArdtoRpi():
             print("No server exist")
         
         self.engine = Engine_Improve(self)
+        self.engine.start()
         self.THRESHOLD_ALT = 0.3
         self.mode_g   = 0
         self.mode_l   = 0
@@ -88,10 +91,13 @@ class readdatafromArdtoRpi():
             pass
     
     # Classifying input data from Arduino NRF - Receiver
-    def getKeyboardInput(self,kp):  
+    #def getKeyboardInput(self,kp):  
+    def getKeyboardInput(self):  
+
 
         # Set into Guided Mode    
-        if (kp =='g'):
+        #if (kp =='g'):
+        if (kp.is_pressed('g')):
             self.mode_g +=1        
             if self.mode_g < 2:   
                 print("Vehicle Mode : Guided") 
@@ -119,7 +125,8 @@ class readdatafromArdtoRpi():
                             self.takeoff = False
                             print("Vehicle Mode : Disarmed")
                             
-        elif (kp == 'h'):
+        #elif (kp == 'h'):
+        elif (kp.is_pressed ('h')):    
             @self.vehicle.on_attribute('mode')
             def mode_callback(self,attr_name, value):
                 print(f">> Mode Updated: {value}")
@@ -130,7 +137,8 @@ class readdatafromArdtoRpi():
                 sleep(1)
                 
         # Go Up
-        if (kp == 'u') and self.vehicle.armed:
+        #if (kp == 'u') and self.vehicle.armed:
+        if (kp.is_pressed('UP')) and self.vehicle.armed:    
             self.count +=1    
             if self.count < 2:     
                 print("Vehicle Mode : Take Off")
@@ -155,15 +163,17 @@ class readdatafromArdtoRpi():
                         self.vehicle.mode = VehicleMode("LAND")
                         
         # Go Right
-        elif (kp == 'd') and self.vehicle.armed:
+        #elif (kp == 'd') and self.vehicle.armed:
+        elif (kp.is_pressed('d')) and self.vehicle.armed:
             print("Go Right")
-            x,y = 0.0, 2.0 
+            x,y = 0.0, 0.5
+            #z = 0
             yaw = self.vehicle.attitude.yaw
-            self.engine_imp.send_global_velocity(
+            self.engine.send_global_velocity(
                 x * np.cos(yaw) - y * np.sin(yaw),
                 x * np.sin(yaw) + y * np.cos(yaw),
                 0,
-                2,      
+                1,      
             )
             
             # 1st option 
@@ -171,17 +181,22 @@ class readdatafromArdtoRpi():
             
             # 2nd option
             #self.engine.send_movement_command_XYA(x,y,self.takeoff_alt)
+            
+            # 3rd option
+            #self.engine.executeChangesNow(x,y,z)
 
         # Go Left
-        elif (kp == 'a') and self.vehicle.armed:
+        #elif (kp == 'a') and self.vehicle.armed:
+        elif (kp.is_pressed('a')) and self.vehicle.armed:
             print("Go Left")
-            x,y = 0.0, -2.0 
+            x,y = 0.0, -0.5 
+            #z = 0
             yaw = self.vehicle.attitude.yaw
-            self.engine_imp.send_global_velocity(
+            self.engine.send_global_velocity(
                 x * np.cos(yaw) - y * np.sin(yaw),
                 x * np.sin(yaw) + y * np.cos(yaw),
                 0,
-                2,      
+                1,      
             )
             
             # 1st option
@@ -190,16 +205,21 @@ class readdatafromArdtoRpi():
             # 2nd option
             #self.engine.send_movement_command_XYA(x,y,self.takeoff_alt)
             
+            # 3rd option
+            #self.engine.executeChangesNow(x,y,z)
+            
         # Go Back
-        elif (kp == 's') and self.vehicle.armed:
+        #elif (kp == 's') and self.vehicle.armed:
+        elif (kp.is_pressed('s')) and self.vehicle.armed:
             print("Go Back")
-            x, y = -2.0, 0.0  # meters
+            x, y = -0.5, 0.0  # meters
+            #z = 0
             yaw = self.vehicle.attitude.yaw
-            self.engine_imp.send_global_velocity(
+            self.engine.send_global_velocity(
                 x * np.cos(yaw) - y * np.sin(yaw),
                 x * np.sin(yaw) + y * np.cos(yaw),
                 0,
-                2,
+                1,
             )
             
             # 1st option
@@ -207,17 +227,22 @@ class readdatafromArdtoRpi():
             
             # 2nd option
             #self.engine.send_movement_command_XYA(x,y,self.takeoff_alt)
+            
+            # 3rd option
+            #self.engine.executeChangesNow(x,y,z)
             
         # Go Front
-        elif (kp == 'w') and self.vehicle.armed:
+        #elif (kp == 'w') and self.vehicle.armed:
+        elif (kp.is_pressed('w')) and self.vehicle.armed:
             print("Go Front")
-            x, y = 2.0, 0.0  # meters
+            x, y = 0.5, 0.0  # meters
+            #z = 0
             yaw = self.vehicle.attitude.yaw
-            self.engine_imp.send_global_velocity(
+            self.engine.send_global_velocity(
                 x * np.cos(yaw) - y * np.sin(yaw),
                 x * np.sin(yaw) + y * np.cos(yaw),
                 0,
-                2,
+                1,
             )
             
             # 1st option
@@ -225,9 +250,13 @@ class readdatafromArdtoRpi():
             
             # 2nd option
             #self.engine.send_movement_command_XYA(x,y,self.takeoff_alt)
+            
+             # 3rd option
+            #self.engine.executeChangesNow(x,y,z)
 
         # Land   
-        elif (kp == 'q') and self.vehicle.armed:
+        #elif (kp == 'q') and self.vehicle.armed:
+        elif (kp.is_pressed('q')) and self.vehicle.armed:
             self.mode_l +=1
             if self.mode_l < 2:
                 
@@ -241,14 +270,15 @@ class readdatafromArdtoRpi():
                 self.vehicle.mode = VehicleMode("LAND")
                 
         # Stop Movement
-        elif (kp == 'e') and self.vehicle.armed:
+        #elif (kp == 'e') and self.vehicle.armed:
+        elif (kp.is_pressed('e')) and self.vehicle.armed:
             print("Vehicle Mode : Freeze")
             x,y,z = 0,0,0
-            self.engine_imp.send_global_velocity(
+            self.engine.send_global_velocity(
             x,
             y,
             z,
-            2, 
+            1, 
             )
             
             # 1st option
@@ -256,18 +286,24 @@ class readdatafromArdtoRpi():
             
             # 2nd option
             #self.engine.send_movement_command_XYA(x,y,self.takeoff_alt)
+            
+            # 3rd option
+            #self.engine.executeChangesNow(x,y,z)
 
         # Yaw Left
-        elif (kp == 'n') and self.vehicle.armed:
+        #lif (kp == 'n') and self.vehicle.armed:
+        elif (kp.is_pressed('LEFT')) and self.vehicle.armed:
             print("Yaw Left")
-            self.engine_imp.send_movement_command_YAW(-10)
+            self.engine.send_movement_command_YAW(-20)
 
         # Yaw Right
-        elif (kp == 'm') and self.vehicle.armed:
+        #elif (kp == 'm') and self.vehicle.armed:
+        elif (kp.is_pressed('RIGHT')) and self.vehicle.armed:
             print("Yaw RIGHT")
-            self.engine_imp.send_movement_command_YAW(10)
+            self.engine.send_movement_command_YAW(20)
             
-        elif (kp == 'r'):
+        #elif (kp == 'r'):
+        elif (kp.is_pressed('r')):
             self.mode_s +=1
             if self.mode_s < 2:
                 print("Warning : Reset Vehicle State")
@@ -276,18 +312,18 @@ class readdatafromArdtoRpi():
                 self.count  = 0
 
         # Stay hovering
-        elif (kp =='f') and self.vehicle.armed and self.takeoff:
-            print("Vehicle Mode : Hovering")
-            x,y,z = 0,0,0
-            self.engine_imp.send_global_velocity(
-            x,
-            y,
-            z,
-            2, 
-            )
+        # elif (kp =='f') and self.vehicle.armed and self.takeoff:
+        #     print("Vehicle Mode : Hovering")
+        #     x,y,z = 0,0,0
+        #     self.engine.send_global_velocity(
+        #     x,
+        #     y,
+        #     z,
+        #     2, 
+        #     )
             
-            # 1st option
-            self.engine.send_global_velocity(0, 0, 0, 1)
+        #     # 1st option
+        #     self.engine.send_global_velocity(0, 0, 0, 1)
             
             # 2nd option
             #self.engine.send_movement_command_XYA(x,y,self.takeoff_alt)
@@ -301,9 +337,11 @@ if __name__ == "__main__":
     #ser = init.initConnection("/dev/ttyAMA0", 9600)
 
     """use usb connection port connect to Arduino"""
-    ser = init.initConnection("/dev/ttyUSB0", 9600)
+    #ser = init.initConnection("/dev/ttyUSB0", 9600)
 
     while True:
-        receivedata = init.getData(ser)
-        vals = init.getKeyboardInput(receivedata)
+        # receivedata = init.getData(ser)
+        # vals = init.getKeyboardInput(receivedata)
+        vals = init.getKeyboardInput()
+
 

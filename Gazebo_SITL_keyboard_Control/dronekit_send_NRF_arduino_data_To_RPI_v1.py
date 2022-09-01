@@ -166,7 +166,10 @@ class readdatafromArdtoRpi():
                 0,
                 2,      
             )
-
+            
+            # 1st option 
+            #self.engine.send_global_velocity(0,0,0,1)
+            
             # 2nd option
             self.engine.send_movement_command_XYA(x,y,self.takeoff_alt)
 
@@ -181,7 +184,10 @@ class readdatafromArdtoRpi():
                 0,
                 2,      
             )
-
+            
+            # 1st option
+            #self.engine.send_global_velocity(0,0,0,1)
+            
             # 2nd option
             self.engine.send_movement_command_XYA(x,y,self.takeoff_alt)
             
@@ -197,6 +203,9 @@ class readdatafromArdtoRpi():
                 2,
             )
 
+            # 1st option
+            # self.engine.send_global_velocity(0, 0, 0, 1)
+            
             # 2nd option
             self.engine.send_movement_command_XYA(x,y,self.takeoff_alt)
             
@@ -211,6 +220,9 @@ class readdatafromArdtoRpi():
                 0,
                 2,
             )
+            
+            # 1st option
+            #self.engine.send_global_velocity(0, 0, 0, 1)
             
             # 2nd option
             self.engine.send_movement_command_XYA(x,y,self.takeoff_alt)
@@ -239,6 +251,9 @@ class readdatafromArdtoRpi():
             z,
             2, 
             )
+            
+            # 1st option
+            # self.engine.send_global_velocity(0, 0, 0, 1)
             
             # 2nd option
             self.engine.send_movement_command_XYA(x,y,self.takeoff_alt)
