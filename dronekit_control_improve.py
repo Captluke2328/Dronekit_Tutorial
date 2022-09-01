@@ -179,20 +179,20 @@ class control_improvise():
                 self.mode_l = 0
                 self.count = 0
             
-        else:
-            if self.vehicle.armed and self.takeoff :
-                print("Vehicle Mode : Hovering")
-                x,y,z = 0,0,0
-                self.engine_imp.send_global_velocity(
-                x,
-                y,
-                z,
-                2, 
-                )
+        #else:
+        #    if self.vehicle.armed and self.takeoff :
+        #        print("Vehicle Mode : Hovering")
+        #        x,y,z = 0,0,0
+        #        self.engine_imp.send_global_velocity(
+        #        x,
+        #        y,
+        #        z,
+        #        2, 
+        #        )
                 # 1st option
-                self.engine_imp.send_global_velocity(0, 0, 0, 1)
+        #        self.engine_imp.send_global_velocity(0, 0, 0, 1)
             
-    #sleep(0.25)
+    sleep(0.25)
             
 if __name__ == '__main__':
     init = control_improvise()

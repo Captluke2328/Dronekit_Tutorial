@@ -13,10 +13,10 @@ from dronekit import *
 #connection_string = '10.60.216.198:14550'
 
 '''Using SiTL Connection'''
-#connection_string = '127.0.0.1:14550'
+connection_string = '127.0.0.1:14550'
 
 '''Using Uart Serial Rx->Tx and Tx-Rx connection'''
-connection_string = '/dev/ttyTHS1,921600'
+#connection_string = '/dev/ttyTHS1,921600'
 
 ''' Using USB Connection '''
 #connection_string = '/dev/ttyACM0'
