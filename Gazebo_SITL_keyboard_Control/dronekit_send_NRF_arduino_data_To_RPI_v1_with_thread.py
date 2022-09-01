@@ -36,6 +36,7 @@ Description : This script is used to establish the connection between RPI to Ard
                r           r     : Reset
                LEFT        n     : Yaw left
                RIGHT       m     : Yaw Right
+               
                            
 """
 import socket
