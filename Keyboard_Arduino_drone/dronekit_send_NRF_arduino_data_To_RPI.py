@@ -167,92 +167,92 @@ class readdatafromArdtoRpi():
         #elif (kp.is_pressed('d')) and self.vehicle.armed:
             print("Go Right")
             x,y = 0.0, 0.5
-            #z = 0
-            yaw = self.vehicle.attitude.yaw
-            self.engine.send_global_velocity(
-                x * np.cos(yaw) - y * np.sin(yaw),
-                x * np.sin(yaw) + y * np.cos(yaw),
-                0,
-                1,      
-            )
+            z = 0
+            # yaw = self.vehicle.attitude.yaw
+            # self.engine.send_global_velocity(
+            #     x * np.cos(yaw) - y * np.sin(yaw),
+            #     x * np.sin(yaw) + y * np.cos(yaw),
+            #     0,
+            #     1,      
+            # )
             
             # 1st option 
-            self.engine.send_global_velocity(0,0,0,1)
+            #self.engine.send_global_velocity(0,0,0,1)
             
             # 2nd option
             #self.engine.send_movement_command_XYA(x,y,self.takeoff_alt)
             
             # 3rd option
-            #self.engine.executeChangesNow(x,y,z)
+            self.engine.executeChangesNow(x,y,z)
 
         # Go Left
         elif (kp == 'a') and self.vehicle.armed:
         #elif (kp.is_pressed('a')) and self.vehicle.armed:
             print("Go Left")
             x,y = 0.0, -0.5 
-            #z = 0
-            yaw = self.vehicle.attitude.yaw
-            self.engine.send_global_velocity(
-                x * np.cos(yaw) - y * np.sin(yaw),
-                x * np.sin(yaw) + y * np.cos(yaw),
-                0,
-                1,      
-            )
+            z = 0
+            # yaw = self.vehicle.attitude.yaw
+            # self.engine.send_global_velocity(
+            #     x * np.cos(yaw) - y * np.sin(yaw),
+            #     x * np.sin(yaw) + y * np.cos(yaw),
+            #     0,
+            #     1,      
+            # )
             
             # 1st option
-            self.engine.send_global_velocity(0,0,0,1)
+            #self.engine.send_global_velocity(0,0,0,1)
             
             # 2nd option
             #self.engine.send_movement_command_XYA(x,y,self.takeoff_alt)
             
             # 3rd option
-            #self.engine.executeChangesNow(x,y,z)
+            self.engine.executeChangesNow(x,y,z)
             
         # Go Back
         elif (kp == 's') and self.vehicle.armed:
         #elif (kp.is_pressed('s')) and self.vehicle.armed:
             print("Go Back")
             x, y = -0.5, 0.0  # meters
-            #z = 0
-            yaw = self.vehicle.attitude.yaw
-            self.engine.send_global_velocity(
-                x * np.cos(yaw) - y * np.sin(yaw),
-                x * np.sin(yaw) + y * np.cos(yaw),
-                0,
-                1,
-            )
+            z = 0
+            # yaw = self.vehicle.attitude.yaw
+            # self.engine.send_global_velocity(
+            #     x * np.cos(yaw) - y * np.sin(yaw),
+            #     x * np.sin(yaw) + y * np.cos(yaw),
+            #     0,
+            #     1,
+            # )
             
             # 1st option
-            self.engine.send_global_velocity(0, 0, 0, 1)
+            #self.engine.send_global_velocity(0, 0, 0, 1)
             
             # 2nd option
             #self.engine.send_movement_command_XYA(x,y,self.takeoff_alt)
             
             # 3rd option
-            #self.engine.executeChangesNow(x,y,z)
+            self.engine.executeChangesNow(x,y,z)
             
         # Go Front
         elif (kp == 'w') and self.vehicle.armed:
         #elif (kp.is_pressed('w')) and self.vehicle.armed:
             print("Go Front")
             x, y = 0.5, 0.0  # meters
-            #z = 0
-            yaw = self.vehicle.attitude.yaw
-            self.engine.send_global_velocity(
-                x * np.cos(yaw) - y * np.sin(yaw),
-                x * np.sin(yaw) + y * np.cos(yaw),
-                0,
-                1,
-            )
+            z = 0
+            # yaw = self.vehicle.attitude.yaw
+            # self.engine.send_global_velocity(
+            #     x * np.cos(yaw) - y * np.sin(yaw),
+            #     x * np.sin(yaw) + y * np.cos(yaw),
+            #     0,
+            #     1,
+            # )
             
             # 1st option
-            self.engine.send_global_velocity(0, 0, 0, 1)
+            #self.engine.send_global_velocity(0, 0, 0, 1)
             
             # 2nd option
             #self.engine.send_movement_command_XYA(x,y,self.takeoff_alt)
             
              # 3rd option
-            #self.engine.executeChangesNow(x,y,z)
+            self.engine.executeChangesNow(x,y,z)
 
         # Land   
         elif (kp == 'q') and self.vehicle.armed:
@@ -274,21 +274,21 @@ class readdatafromArdtoRpi():
         #elif (kp.is_pressed('e')) and self.vehicle.armed:
             print("Vehicle Mode : Freeze")
             x,y,z = 0,0,0
-            self.engine.send_global_velocity(
-            x,
-            y,
-            z,
-            1, 
-            )
+            # self.engine.send_global_velocity(
+            # x,
+            # y,
+            # z,
+            # 1, 
+            # )
             
             # 1st option
-            self.engine.send_global_velocity(0, 0, 0, 1)
+            #self.engine.send_global_velocity(0, 0, 0, 1)
             
             # 2nd option
             #self.engine.send_movement_command_XYA(x,y,self.takeoff_alt)
             
             # 3rd option
-            #self.engine.executeChangesNow(x,y,z)
+            self.engine.executeChangesNow(x,y,z)
 
         # Yaw Left
         elif (kp == 'n') and self.vehicle.armed:
