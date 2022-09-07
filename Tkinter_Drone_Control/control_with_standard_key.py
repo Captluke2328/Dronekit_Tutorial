@@ -1,7 +1,7 @@
+import imp
 import time
 from dronekit import *
 from pymavlink import mavutil
-
 
 # -- Importing Tkinter : sudo apt-get install python-tk or pip install tk
 import tkinter as tk
@@ -44,7 +44,6 @@ def arm_and_takeoff(altitude):
           break
       time.sleep(1)
       
-
  #-- Define the function for sending mavlink velocity command in body frame
 def set_velocity_body(vehicle, vx, vy, vz):
     """ Remember: vz is positive downward!!!
@@ -70,33 +69,49 @@ def set_velocity_body(vehicle, vx, vy, vz):
             0, 0)
     vehicle.send_mavlink(msg)
     vehicle.flush()
+    
+    
+def rotate(vehicle, direction, rotation_angle):
+    msg = vehicle.message_factory.command_long_encode(
+            0, 0,    # target system, target component
+            mavutil.mavlink.MAV_CMD_CONDITION_YAW, #command
+            0, #confirmation
+            rotation_angle,  # param 1, yaw in degrees
+            5,          # param 2, yaw speed deg/s
+            direction,          # param 3, direction -1 ccw, 1 cw
+            True, # param 4, 1 - relative to current position offset, 0 - absolute, angle 0 means North
+            0, 0, 0)    # param 5 ~ 7 not used
 
+    vehicle.send_mavlink(msg)
+    vehicle.flush()
 
 #-- Key event function
 def key(event):
     if event.char == event.keysym: #-- standard keys
         if event.keysym == 'r':
             print("r pressed >> Set the vehicle to RTL")
-            vehicle.mode = VehicleMode("RTL")
-            
+            vehicle.mode = VehicleMode("RTL")  
+        elif event.keysym == 'w':
+            set_velocity_body(vehicle, gnd_speed, 0, 0)       
+        elif event.keysym == 's':
+            set_velocity_body(vehicle,-gnd_speed, 0, 0)     
+        elif event.keysym == 'a':
+            set_velocity_body(vehicle, 0, -gnd_speed, 0)      
+        elif event.keysym == 'd':
+            set_velocity_body(vehicle, 0, gnd_speed, 0)
+        
     else: #-- non standard keys
         if event.keysym == 'Up':
-            set_velocity_body(vehicle, gnd_speed, 0, 0)
-        elif event.keysym == 'Down':
-            set_velocity_body(vehicle,-gnd_speed, 0, 0)
+            #- Takeoff
+            arm_and_takeoff(10)
         elif event.keysym == 'Left':
-            set_velocity_body(vehicle, 0, -gnd_speed, 0)
+            rotate(vehicle, -1, 10)
         elif event.keysym == 'Right':
-            set_velocity_body(vehicle, 0, gnd_speed, 0)
+            rotate(vehicle, 1, 10)
     
-
-#---- MAIN FUNCTION
-#- Takeoff
-arm_and_takeoff(10)
- 
-#- Read the keyboard with tkinter
-root = tk.Tk()
-print(">> Control the drone with the arrow keys. Press r for RTL mode")
-root.bind_all('<Key>', key)
-root.mainloop()
- 
+if __name__ == "__main__":
+    #- Read the keyboard with tkinter
+    root = tk.Tk()
+    print(">> Control the drone with the arrow keys. Press r for RTL mode")
+    root.bind_all('<Key>', key)
+    root.mainloop()
