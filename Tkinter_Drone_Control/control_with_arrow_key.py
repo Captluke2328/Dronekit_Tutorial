@@ -8,7 +8,11 @@ import tkinter as tk
 
 # -- Connect to the vehicle
 print("Connecting")
-vehicle = connect('127.0.0.1:14550',wait_ready=True)
+#vehicle = connect('127.0.0.1:14550',wait_ready=True)
+
+# Office Connection
+vehicle = connect('10.60.217.30:14553',wait_ready=True)
+
 print("Virtual Copter is ready")
 
 # -- Setup the flying speed
