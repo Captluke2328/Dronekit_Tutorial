@@ -1,4 +1,3 @@
-import imp
 import time
 from dronekit import *
 from pymavlink import mavutil
