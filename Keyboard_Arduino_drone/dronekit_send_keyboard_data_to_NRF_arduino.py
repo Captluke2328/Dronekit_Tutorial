@@ -120,7 +120,7 @@ if __name__ == '__main__':
     
     init = KeyboardArduino()
     
-    ser = init.initConnection("/dev/cu.usbmodem1201","9600")
+    ser = init.initConnection("/dev/cu.usbmodem1101","9600")
     
     while True:
         vals = init.getKeyboardInput()  
