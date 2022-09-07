@@ -16,7 +16,7 @@ vehicle = connect('10.60.217.30:14553',wait_ready=True)
 print("Virtual Copter is ready")
 
 # -- Setup the flying speed
-gnd_speed = 5 # [m/s]
+gnd_speed = 0.5 # [m/s]
 
 #-- Define arm and takeoff
 def arm_and_takeoff(altitude):
