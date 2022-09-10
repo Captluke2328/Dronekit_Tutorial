@@ -53,6 +53,7 @@ class readdatafromArdtoRpi():
         try:       
             self.connection_string = '/dev/ttyAMA0,921600'
             #self.connection_string = '127.0.0.1:14550'
+            #self.connection_string = '192.168.8.146:14553'
             self.vehicle = connect(self.connection_string, wait_ready=True)
             print("Virtual Copter is Ready")
 
