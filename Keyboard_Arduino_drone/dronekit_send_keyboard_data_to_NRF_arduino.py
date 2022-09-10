@@ -111,8 +111,8 @@ class KeyboardArduino:
             self.sendData('m')
         
         # Reset
-        else:
-            self.sendData('f')
+        # else:
+        #     self.sendData('f')
                 
     sleep(0.25)
             
