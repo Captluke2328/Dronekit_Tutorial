@@ -34,22 +34,22 @@ class controlTab:
     
     # Forward
     def increaseSpeedX(self):
-        self.speed_x = 10 #self.speed_x + self.increment_value_x
+        self.speed_x = 1 #self.speed_x + self.increment_value_x
         self.engine.executeChangesNow()
         
     # Backward
     def decreaseSpeedX(self):
-        self.speed_x = -10 #self.speed_x - self.increment_value_x
+        self.speed_x = -1 #self.speed_x - self.increment_value_x
         self.engine.executeChangesNow()
     
     # Move Left
     def leftSpeedY(self):
-        self.speed_y = -10 #self.speed_y - self.increment_value_y
+        self.speed_y = -1 #self.speed_y - self.increment_value_y
         self.engine.executeChangesNow()
     
     # Move Right
     def rightSpeedY(self):
-        self.speed_y = 10 #self.speed_y + self.increment_value_y
+        self.speed_y = 1 #self.speed_y + self.increment_value_y
         self.engine.executeChangesNow()
     
     # Cancel XMOVE
