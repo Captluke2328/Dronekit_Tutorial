@@ -286,14 +286,14 @@ class readdatafromArdtoRpi():
         # Yaw Left
         elif (kp.is_pressed('LEFT')) and self.vehicle.armed:
             print("Yaw Left")
-            self.engine.rotate(-10)
-            #self.engine.send_movement_command_YAW(-20)
+            self.engine.rotate(-5)
+            #self.engine.send_movement_command_YAW(-5)
 
         # Yaw Right
         elif (kp.is_pressed('RIGHT')) and self.vehicle.armed:
             print("Yaw RIGHT")
-            self.engine.rotate(10)
-            #self.engine.send_movement_command_YAW(20)
+            self.engine.rotate(5)
+            #self.engine.send_movement_command_YAW(5)
 
         elif (kp.is_pressed('r')):
             self.mode_s +=1

@@ -72,6 +72,29 @@ class Engine_Improve(threading.Thread):
        
         self.vehicle.send_mavlink(msg)
         self.vehicle.flush()
+        
+    def rotate(self, heading):
+        speed = 0
+        direction = 1 
+        print("Sending YAW movement command with heading: %f" % heading)
+
+        if heading < 0:
+            heading = heading*-1
+            direction = -1
+            
+        print(direction,heading)
+
+        msg = self.vehicle.message_factory.command_long_encode(
+        0,0,
+        mavutil.mavlink.MAV_CMD_CONDITION_YAW,
+        0,
+        heading,
+        speed,
+        direction,
+        True,
+        0,0,0)
+        self.vehicle.send_mavlink(msg)
+        self.vehicle.flush()
             
     def send_movement_command_YAW(self,heading):
         speed = 0
