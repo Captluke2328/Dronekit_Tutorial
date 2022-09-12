@@ -1,8 +1,10 @@
 from dronekit import *
 from dronekit_config import *
-from dronekit_control_without_thread import *
+from dronekit_control import *
 
 from time import sleep
+
+from dronekit_control_using_keyboard.dronekit_control import dronekitControl
         
 if __name__ == '__main__':
     while True:
@@ -17,12 +19,8 @@ if __name__ == '__main__':
     while drone.is_active:
         try:
             
-            # Using Thread - which is not working now
-            #control = dronekitControlThread(drone)
-            #control.start()
-            
             # Without using Thread
-            control = dronekitControlwithoutThread(drone)
+            control = dronekitControl(drone)
             control.control()
             
         except Exception as e:

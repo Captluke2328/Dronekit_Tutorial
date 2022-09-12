@@ -5,7 +5,7 @@ import keyboard as kp
 from time import sleep
 from dronekit_control_tab import *
 
-class dronekitControlwithoutThread():
+class dronekitControl():
     def __init__(self,drone):
         self.daemon = True
         self.drone = drone
