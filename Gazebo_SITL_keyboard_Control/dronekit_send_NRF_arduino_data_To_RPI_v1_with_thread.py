@@ -267,32 +267,32 @@ class readdatafromArdtoRpi():
         elif (kp.is_pressed('e')) and self.vehicle.armed:
             print("Vehicle Mode : Freeze")
             x,y,z = 0,0,0
-            self.engine.send_global_velocity(
-            x,
-            y,
-            z,
-            1, 
-            )
+            # self.engine.send_global_velocity(
+            # x,
+            # y,
+            # z,
+            # 1, 
+            # )
             
              # 1st option
-            self.engine.send_global_velocity(0, 0, 0, 1)
+            #self.engine.send_global_velocity(0, 0, 0, 1)
             
             # 2nd option
             #self.engine.send_movement_command_XYA(x,y,self.takeoff_alt)
 
             # 3rd option
-            #self.engine.executeChangesNow(x,y,z)
+            self.engine.executeChangesNow(x,y,z)
             
         # Yaw Left
         elif (kp.is_pressed('LEFT')) and self.vehicle.armed:
             print("Yaw Left")
-            self.engine.rotate(-20)
+            self.engine.rotate(-10)
             #self.engine.send_movement_command_YAW(-20)
 
         # Yaw Right
         elif (kp.is_pressed('RIGHT')) and self.vehicle.armed:
             print("Yaw RIGHT")
-            self.engine.rotate(20)
+            self.engine.rotate(10)
             #self.engine.send_movement_command_YAW(20)
 
         elif (kp.is_pressed('r')):
