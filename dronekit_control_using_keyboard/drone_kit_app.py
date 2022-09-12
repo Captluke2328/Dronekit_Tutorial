@@ -4,8 +4,7 @@ from dronekit_control import *
 
 from time import sleep
 
-from dronekit_control_using_keyboard.dronekit_control import dronekitControl
-        
+
 if __name__ == '__main__':
     while True:
         try:
@@ -18,7 +17,6 @@ if __name__ == '__main__':
             
     while drone.is_active:
         try:
-            
             # Without using Thread
             control = dronekitControl(drone)
             control.control()

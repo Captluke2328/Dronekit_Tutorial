@@ -17,7 +17,7 @@ class dronekitControl():
         #delay = 1
             try:             
                 if kp.is_pressed('UP'):
-                    self.control_tab.armAndTakeoff(1)
+                    self.control_tab.armAndTakeoff(5)
                     print("Takeoff") 
                     return
                     
