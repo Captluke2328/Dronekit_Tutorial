@@ -51,8 +51,8 @@ class readdatafromArdtoRpi():
     # Connect to Copter
     def __init__(self):
         try:       
-            self.connection_string = '/dev/ttyAMA0,921600'
-            #self.connection_string = '127.0.0.1:14550'
+            #self.connection_string = '/dev/ttyAMA0,921600'
+            self.connection_string = '127.0.0.1:14550'
             #self.connection_string = '192.168.8.146:14553'
             self.vehicle = connect(self.connection_string, wait_ready=True)
             print("Virtual Copter is Ready")
@@ -231,7 +231,14 @@ class readdatafromArdtoRpi():
             
             # 3rd option
             self.engine.executeChangesNow(x,y,z)
-            
+        
+        elif (kp == 'b') and self.vehicle.armed:
+        #elif (kp.is_pressed('s')) and self.vehicle.armed:
+            print("Move Backward")
+            x, y = -0.5, 0.0 # meters
+            z = 0 
+            self.engine.executeChangesNow(x,y,z)
+        
         # Go Front
         elif (kp == 'w') and self.vehicle.armed:
         #elif (kp.is_pressed('w')) and self.vehicle.armed:
@@ -340,10 +347,14 @@ if __name__ == "__main__":
     #ser = init.initConnection("/dev/ttyAMA0", 9600)
 
     """use usb connection port connect to Arduino"""
-    ser = init.initConnection("/dev/ttyUSB0", 9600)
+    #ser = init.initConnection("/dev/ttyUSB0", 9600)
+    ser = init.initConnection("COM14", 115200)
 
     while True:
         receivedata = init.getData(ser)
-        vals = init.getKeyboardInput(receivedata)
+        
+        if receivedata != None:
+            #print(receivedata);
+            vals = init.getKeyboardInput(receivedata)
 
 
