@@ -108,7 +108,10 @@ void GUIDED(){
   servo5.write(1900); // guided -> CH5
 }
 
-void RTL(){Serial.println("COPTER: RTL");}
+void RTL(){
+  Serial.println("COPTER: RTL");
+  servo5.write(1748); // guided -> CH5
+  }
 
 void LAND(){
   Serial.println("COPTER: Land");
