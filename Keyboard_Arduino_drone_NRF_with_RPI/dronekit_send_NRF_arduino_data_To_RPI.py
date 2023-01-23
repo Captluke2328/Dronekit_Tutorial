@@ -311,7 +311,8 @@ class readdatafromArdtoRpi():
             print("Yaw RIGHT")
             self.engine.rotate(5)
             #self.engine.send_movement_command_YAW(5)
-            
+         
+        # reset state   
         elif (kp == 'r'):
         #elif (kp.is_pressed('r')):
             self.mode_s +=1
