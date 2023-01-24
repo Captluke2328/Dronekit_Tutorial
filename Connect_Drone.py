@@ -18,14 +18,19 @@ from dronekit import *
 '''Using SiTL Connection from  different computer - This IP address below to receiver device for example RPI
    This IP address is based on given ZeroTier IP address'''
 #connection_string = '192.168.195.204:14551'
-connection_string = '192.168.195.204:14553'
+#connection_string = '192.168.195.204:14553'
 #connection_string = '192.168.195.190:14553'
 
 '''Using Uart Serial Rx->Tx and Tx-Rx connection'''
+# For Jetson Nano
 #connection_string = '/dev/ttyTHS1,921600'
+
+# For RPI
+connection_string = '/dev/ttyAMA0,921600'
 
 ''' Using USB Connection '''
 #connection_string = '/dev/ttyACM0'
+
 
 vehicle = connect(connection_string, wait_ready = True)
 print("Virtual Copter is Ready")
