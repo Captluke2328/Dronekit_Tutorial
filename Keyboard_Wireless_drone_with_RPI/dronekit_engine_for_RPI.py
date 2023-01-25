@@ -37,6 +37,8 @@ class Engine_Improve(threading.Thread):
             self.vehicle.send_mavlink(msg)
             sleep(1)
     
+    ##############################################################################
+
     # Backup function to determine if drone can move left, right, backward and forward
     def send_movement_command_XYA(self,velocity_x, velocity_y, altitude):
 
@@ -61,7 +63,7 @@ class Engine_Improve(threading.Thread):
         
 ##############################################################################
 
-    def executeChangesNow(self,velocity_x, velocity_y, altitude):
+    def executeChangesNow(self,velocity_x, velocity_y, velocity_z, altitude):
 
         #velocity_x positive = forward. negative = backwards
         #velocity_y positive = right. negative = left
@@ -70,31 +72,17 @@ class Engine_Improve(threading.Thread):
         #print("Sending XYZ movement command with v_x(forward/backward): %f v_y(right/left): %f " % (velocity_x,velocity_y))
 
         msg = self.vehicle.message_factory.set_position_target_local_ned_encode(
-        0,      
-        0, 0,    
-        mavutil.mavlink.MAV_FRAME_BODY_NED,  #relative to drone heading pos relative to EKF origin
-        0b0000111111000111,  # original bit -> 0b0000111111000111, #ignore velocity z and other pos arguments # 0b0000111111100011
+        0,       # time_boot_ms (not used)
+        0, 0,    # target system, target component
+        mavutil.mavlink.MAV_FRAME_BODY_NED,  # frame
+        0b0000111111000111, # type_mask (only positions enabled)
         0, 0, 0,
-        velocity_x, velocity_y, 0, 
+        velocity_x, velocity_y, velocity_z, # x, y, z velocity in m/s
         0, 0, altitude, 
         0, 0)    
 
         self.vehicle.send_mavlink(msg)
         
-    # def executeChangesNow(self,velocity_x, velocity_y, velocity_z):   
-    #     msg = self.vehicle.message_factory.set_position_target_local_ned_encode(
-    #     0,       # time_boot_ms (not used)
-    #     0, 0,    # target system, target component
-    #     mavutil.mavlink.MAV_FRAME_BODY_NED, # frame
-    #     0b0000111111000111, # type_mask (only positions enabled)
-    #     0, 0, 0,
-    #     velocity_x, velocity_y, velocity_z, # x, y, z velocity in m/s
-    #     0, 0, 0, # x, y, z acceleration (not supported yet, ignored in GCS_Mavlink)
-    #     0, 0)
-       
-    #     self.vehicle.send_mavlink(msg)
-    #     self.vehicle.flush()
-
 ##############################################################################
 
     def rotate(self, heading):
@@ -136,7 +124,6 @@ class Engine_Improve(threading.Thread):
         0, 0, 0)    
 
         self.vehicle.send_mavlink(msg)
-        #Vehicle.commands.flush()
         
     
     # def send_movement_command_YAW(self,heading):

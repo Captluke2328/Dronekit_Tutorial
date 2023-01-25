@@ -9,10 +9,18 @@ import os
 class ReadKeyboard:
     def __init__(self):
         try:       
-            #self.connection_string = '/dev/ttyAMA0,921600'
-            self.connection_string = '192.168.8.146:14553'
-            #self.connection_string = '127.0.0.1:14550'
+            '''RPI'''
+            self.connection_string = '/dev/ttyAMA0,921600'
+
+            '''Gazebo'''
             #self.connection_string = '192.168.8.146:14553'
+
+            '''SiTL'''
+            #self.connection_string = '127.0.0.1:14550'
+
+            '''ZeroTier'''
+            #self.connection_string = '192.168.8.146:14553'
+
             self.vehicle = connect(self.connection_string, wait_ready=True)
             print("Virtual Copter is Ready")
 
@@ -107,15 +115,15 @@ class ReadKeyboard:
             print("Go Right")
             x,y=0.0,0.3
             z=0
-            self.engine.executeChangesNow(x,y,self.takeoff_alt)
+            self.engine.executeChangesNow(x,y,z,self.takeoff_alt)
             self.engine.send_movement_command_YAW(0)
   
         # Go Left
         elif kp.is_pressed('a') and self.vehicle.armed:
             print("Go Left")
             x,y = 0.0, -0.3 
-            z = 0
-            self.engine.executeChangesNow(x,y,self.takeoff_alt)
+            z=0
+            self.engine.executeChangesNow(x,y,z,self.takeoff_alt)
             self.engine.send_movement_command_YAW(0)
 
         # Go Back
@@ -123,6 +131,8 @@ class ReadKeyboard:
             print("Go Back")
             x, y = -0.3, 0.0  # meters
             z = 0
+
+            # Early Option
             # yaw = self.vehicle.attitude.yaw
             # self.engine.send_global_velocity(
             #     x * np.cos(yaw) - y * np.sin(yaw),
@@ -138,7 +148,7 @@ class ReadKeyboard:
             #self.engine.send_movement_command_XYA(-0.3,y,self.takeoff_alt)
             
             # 3rd option
-            self.engine.executeChangesNow(x,y,self.takeoff_alt)
+            self.engine.executeChangesNow(x,y,z,self.takeoff_alt)
             self.engine.send_movement_command_YAW(0)
   
         # Go Front
@@ -146,6 +156,8 @@ class ReadKeyboard:
             print("Go Front")
             x, y = 0.3, 0.0  # meters
             z = 0
+
+            # Early Option
             # yaw = self.vehicle.attitude.yaw
             # self.engine.send_global_velocity(
             #     x * np.cos(yaw) - y * np.sin(yaw),
@@ -161,7 +173,7 @@ class ReadKeyboard:
             #self.engine.send_movement_command_XYA(0.3,y,self.takeoff_alt)
             
              # 3rd option
-            self.engine.executeChangesNow(x,y,self.takeoff_alt)
+            self.engine.executeChangesNow(x,y,z,self.takeoff_alt)
             self.engine.send_movement_command_YAW(0)
 
         # Land   
@@ -184,6 +196,8 @@ class ReadKeyboard:
             print("Stop movement")
             print("Vehicle Mode : Freeze")
             x,y,z = 0,0,0
+
+            # Early Option
             # self.engine.send_global_velocity(
             # x,
             # y,
@@ -198,9 +212,25 @@ class ReadKeyboard:
             #self.engine.send_movement_command_XYA(x,y,self.takeoff_alt)
             
             # 3rd option
-            self.engine.executeChangesNow(x,y,self.takeoff_alt)    
+            self.engine.executeChangesNow(x,y,z,self.takeoff_alt)    
             self.engine.send_movement_command_YAW(0)
 
+        # Yaw Left
+        elif kp.is_pressed('q') and self.vehicle.armed:
+            print("Yaw Left")
+            self.engine.executeChangesNow(0,0,0,self.takeoff_alt)
+            self.engine.send_movement_command_YAW(-12)
+
+            #self.engine.rotate(-5)
+
+        # Yaw Right
+        elif kp.is_pressed('e') and self.vehicle.armed:
+            print("Yaw RIGHT")
+            self.engine.executeChangesNow(0,0,0,self.takeoff_alt)
+            self.engine.send_movement_command_YAW(12)
+
+            #self.engine.rotate(5)
+        
         # Reset
         elif kp.is_pressed('r'):
             print("Reset")
@@ -212,26 +242,6 @@ class ReadKeyboard:
                 self.mode_l = 0
                 self.count  = 0
 
-        # Yaw Left
-        elif kp.is_pressed('q') and self.vehicle.armed:
-        #elif kp.is_pressed('LEFT') and self.vehicle.armed:
-
-            print("Yaw Left")
-            self.engine.executeChangesNow(0,0,self.takeoff_alt)
-            #self.engine.rotate(-5)
-
-            self.engine.send_movement_command_YAW(-12)
-
-        # Yaw Right
-        elif kp.is_pressed('e') and self.vehicle.armed:
-        #elif kp.is_pressed('RIGHT') and self.vehicle.armed:
-
-            print("Yaw RIGHT")
-            self.engine.executeChangesNow(0,0,self.takeoff_alt)
-            #self.engine.rotate(5)
-
-            self.engine.send_movement_command_YAW(12)
-                    
     sleep(0.25)
 
 if __name__ == "__main__":

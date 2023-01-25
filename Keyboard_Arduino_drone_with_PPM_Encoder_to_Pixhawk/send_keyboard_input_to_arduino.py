@@ -120,7 +120,7 @@ if __name__ == '__main__':
     
     init = KeyboardArduino()
     
-    ser = init.initConnection("COM3","9600")
+    ser = init.initConnection("COM4","115200")
     
     while True:
         vals = init.getKeyboardInput()  
