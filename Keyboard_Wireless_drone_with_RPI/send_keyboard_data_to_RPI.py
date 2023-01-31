@@ -23,6 +23,7 @@ class ReadKeyboard:
             '''ZeroTier'''
             #self.connection_string = '192.168.8.146:14553'
 
+            self.buzzer  = Buzzer(15)
             self.vehicle = connect(self.connection_string, wait_ready=True)
             print("Virtual Copter is Ready")
 
@@ -39,8 +40,6 @@ class ReadKeyboard:
         self.takeoff  = False
         self.takeoff_alt = 1.5
 
-        self.buzzer = Buzzer(15)
-                        
     def getKeyboardInput(self):  
         # Set into Guided Mode    
         if kp.is_pressed('g'): 
