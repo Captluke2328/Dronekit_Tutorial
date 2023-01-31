@@ -258,7 +258,6 @@ class ReadKeyboard:
         # Reset
         elif kp.is_pressed('r'):
             print("Reset")
-            #elif (kp.is_pressed('r')):
             self.mode_s +=1
             if self.mode_s < 2:
                 print("Warning : Reset Vehicle State")
