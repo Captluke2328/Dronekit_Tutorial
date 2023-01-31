@@ -80,6 +80,14 @@ class ReadKeyboard:
                 
             self.vehicle.mode = VehicleMode("STABILIZE")
             print("Vehicle Mode : Stabilize")
+
+            self.mode_s += 1
+            if self.mode_s < 2:
+                print("Warning : Reset Vehicle State")
+                self.mode_g = 0
+                self.mode_l = 0
+                self.count = 0
+
             while not self.vehicle.mode.name == "STABILIZE":
                 sleep(1)
              
@@ -113,7 +121,7 @@ class ReadKeyboard:
         # Go Right
         elif kp.is_pressed('d') and self.vehicle.armed:
             print("Go Right")
-            x,y=0.0,0.3
+            x,y=0.0,0.5
             z=0
             self.engine.executeChangesNow(x,y,z,self.takeoff_alt)
             self.engine.send_movement_command_YAW(0)
@@ -121,7 +129,7 @@ class ReadKeyboard:
         # Go Left
         elif kp.is_pressed('a') and self.vehicle.armed:
             print("Go Left")
-            x,y = 0.0, -0.3 
+            x,y = 0.0, -0.5 
             z=0
             self.engine.executeChangesNow(x,y,z,self.takeoff_alt)
             self.engine.send_movement_command_YAW(0)
@@ -129,7 +137,7 @@ class ReadKeyboard:
         # Go Back
         elif kp.is_pressed('s') and self.vehicle.armed:
             print("Go Back")
-            x, y = -0.3, 0.0  # meters
+            x, y = -0.5, 0.0  # meters
             z = 0
 
             # Early Option
@@ -154,7 +162,7 @@ class ReadKeyboard:
         # Go Front
         elif kp.is_pressed('w') and self.vehicle.armed:
             print("Go Front")
-            x, y = 0.3, 0.0  # meters
+            x, y = 0.5, 0.0  # meters
             z = 0
 
             # Early Option
@@ -186,11 +194,18 @@ class ReadKeyboard:
                 self.mode_g = 0
                 self.count = 0
                 
-                print("Vehicle Mode : Land")
                 self.vehicle.channels.overrides = {}
                 self.vehicle.mode = VehicleMode("LAND")
-                os.system("echo 2328 | sudo -S pkill -9 -f send_keyboard_data_to_RPI.py")
+                print("Vehicle Mode : Land")
+                #os.system("echo 2328 | sudo -S pkill -9 -f send_keyboard_data_to_RPI.py")
 
+                self.mode_s += 1
+                if self.mode_s < 2:
+                    print("Warning : Reset Vehicle State")
+                    self.mode_g = 0
+                    self.mode_l = 0
+                    self.count = 0
+                
         # Stop Movement
         elif kp.is_pressed('SPACE') and self.vehicle.armed:
             print("Stop movement")
@@ -219,7 +234,7 @@ class ReadKeyboard:
         elif kp.is_pressed('q') and self.vehicle.armed:
             print("Yaw Left")
             self.engine.executeChangesNow(0,0,0,self.takeoff_alt)
-            self.engine.send_movement_command_YAW(-12)
+            self.engine.send_movement_command_YAW(-15)
 
             #self.engine.rotate(-5)
 
@@ -227,7 +242,7 @@ class ReadKeyboard:
         elif kp.is_pressed('e') and self.vehicle.armed:
             print("Yaw RIGHT")
             self.engine.executeChangesNow(0,0,0,self.takeoff_alt)
-            self.engine.send_movement_command_YAW(12)
+            self.engine.send_movement_command_YAW(15)
 
             #self.engine.rotate(5)
         
