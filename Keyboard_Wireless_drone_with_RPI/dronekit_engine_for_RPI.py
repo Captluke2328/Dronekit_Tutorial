@@ -6,9 +6,18 @@ from time import  sleep
 class Engine_Improve(threading.Thread):
     def __init__(self,drone):
         threading.Thread.__init__(self)
-        self.daemon = True
-        self.drone = drone
+        self.daemon  = True
+        self.drone   = drone
         self.vehicle = drone.vehicle
+        self.buzzer  = drone.buzzer
+
+
+        # Added Buzzer to notify user that Drone is ready
+        self.buzzer.on()
+        sleep(1)
+        self.buzzer.off()
+        sleep(1)
+
         print("Engine has started")
 
     def send_global_velocity(self,velocity_x, velocity_y, velocity_z, duration):

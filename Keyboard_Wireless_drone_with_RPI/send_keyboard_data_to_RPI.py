@@ -1,10 +1,12 @@
 import keyboard as kp
 from time import sleep
+from gpiozero import Buzzer
 import socket
 import numpy as np
 from dronekit import *
 from dronekit_engine_for_RPI import *
 import os
+
 
 class ReadKeyboard:
     def __init__(self):
@@ -34,8 +36,10 @@ class ReadKeyboard:
         self.mode_l   = 0
         self.mode_s   = 0
         self.count    = 0
-        self.takeoff = False
+        self.takeoff  = False
         self.takeoff_alt = 1.5
+
+        self.buzzer = Buzzer(15)
                         
     def getKeyboardInput(self):  
         # Set into Guided Mode    
@@ -205,6 +209,12 @@ class ReadKeyboard:
                     self.mode_g = 0
                     self.mode_l = 0
                     self.count = 0
+
+                # Added Buzzer to notify user that Land command is accepted
+                self.buzzer.on()
+                sleep(0.5)
+                self.buzzer.off()
+                sleep(0.5)
                 
         # Stop Movement
         elif kp.is_pressed('SPACE') and self.vehicle.armed:
