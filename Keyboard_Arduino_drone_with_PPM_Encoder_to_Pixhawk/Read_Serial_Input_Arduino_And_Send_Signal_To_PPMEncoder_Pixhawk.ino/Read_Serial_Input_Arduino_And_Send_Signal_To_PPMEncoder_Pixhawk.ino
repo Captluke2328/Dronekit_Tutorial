@@ -17,6 +17,11 @@
   servo6.attach(10) = CH6 //land     -> CH[5] (From PPM reader)
   #############################################################################################
   
+  Note : From Fs-ia6B Channel, we will use singal pin of Fs-ia6B which will be connected to D3 (interrupt pin) of 
+  Arduino. 
+  
+  From Arduino, we will connect pin D3 to D10 to PPM Encoder Pin.
+  From PPM Encoder Pin, we will connect Signal, VDD and GND pin to PIXHAWK
 
 /**************************************************************/
 
