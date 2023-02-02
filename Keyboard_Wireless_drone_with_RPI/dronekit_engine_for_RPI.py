@@ -133,7 +133,7 @@ class Engine_Improve(threading.Thread):
         0, 0, 0)    
 
         self.vehicle.send_mavlink(msg)
-        
+        self.vehicle.flush()
     
     # def send_movement_command_YAW(self,heading):
     #     speed = 0
